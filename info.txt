@@ -1,0 +1,11 @@
+# PS4 Linux Setup - manifest
+# One path per line, relative to the endpoint root.
+# Blank lines and lines starting with # are ignored.
+
+Setup.ps1
+modules/UI.psm1
+modules/Downloads.psm1
+modules/Drives.psm1
+modules/AutomaticExternal.psm1
+modules/ManualExternal.psm1
+modules/Internal.psm1
