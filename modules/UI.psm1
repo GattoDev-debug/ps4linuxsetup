@@ -101,7 +101,7 @@ function Show-MainWizard {
     Initialize-WinForms
 
     $form = New-WizardForm "PS4 Linux Setup" 760 540
-    Add-WizardHeader $form "PS4 Linux Setup" "Prepare an external USB drive for PS4 Linux."
+    Add-WizardHeader $form "PS4 Linux Setup" "Prepare PS4 Linux.`nStable Version."
 
     $group = New-Object System.Windows.Forms.GroupBox
     $group.Text = "Setup configuration"
