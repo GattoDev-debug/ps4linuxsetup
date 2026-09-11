@@ -49,17 +49,12 @@ try {
         throw "Setup.ps1 was not downloaded. Is it listed in info.txt?"
     }
 
-    # --- hidden VBS launcher so no console shows behind the GUI -----
-    $vbsPath = Join-Path $InstallDir "launch.vbs"
-    $vbs = @"
-Set sh = CreateObject("WScript.Shell")
-sh.Run "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ""$setup""", 0, True
-"@
-    Set-Content -LiteralPath $vbsPath -Value $vbs -Encoding ASCII
-
-    # --- hidden watcher: launch elevated, then delete folder --------
+    # --- hidden watcher: launch Setup elevated, then delete folder ---
+    # Runs in its own hidden PowerShell so the bootstrap window can
+    # close immediately. The watcher waits for Setup.ps1 to exit, then
+    # removes the install folder.
     $watcherLines = @(
-        "Start-Process -FilePath 'wscript.exe' -ArgumentList '$vbsPath' -Verb RunAs -Wait"
+        "Start-Process -FilePath 'powershell.exe' -ArgumentList @('-NoProfile','-ExecutionPolicy','Bypass','-WindowStyle','Hidden','-File','$setup') -Verb RunAs -Wait"
         "Start-Sleep -Milliseconds 800"
         "Remove-Item -LiteralPath '$InstallDir' -Recurse -Force -ErrorAction SilentlyContinue"
     )
