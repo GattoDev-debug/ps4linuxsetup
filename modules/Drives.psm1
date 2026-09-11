@@ -149,14 +149,13 @@ The wizard will:
   - create an MBR partition table
   - create one partition
   - format it as FAT32
-
 This cannot be undone.
 
 
 "@
 
     $form = New-WizardForm "Confirm disk erase" 700 440
-    Add-WizardHeader $form "Final disk confirmation" "This operation is destructive."
+    $null = Add-WizardHeader $form "Final disk confirmation" "This operation is destructive."
 
     $label = New-Object System.Windows.Forms.Label
     $label.Text = $message
@@ -170,7 +169,10 @@ This cannot be undone.
     $box.Size = New-Object System.Drawing.Size(630, 30)
     $form.Controls.Add($box)
 
-    $result = $false
+    # Shared state object - property writes on this cross the
+    # click handler's scope boundary.
+    $state = [pscustomobject]@{ Confirmed = $false }
+
     $cancel = New-Object System.Windows.Forms.Button
     $cancel.Text = "Cancel"
     $cancel.Location = New-Object System.Drawing.Point(420, 360)
@@ -187,15 +189,14 @@ This cannot be undone.
             Show-ErrorBox "Type ERASE exactly to confirm."
             return
         }
-        $result = $true
+        $state.Confirmed = $true
         $form.Close()
     })
     $form.Controls.Add($erase)
 
     [void]$form.ShowDialog()
-    return $result
+    return $state.Confirmed
 }
-
 function Invoke-DiskpartScript([string[]]$Lines) {
     $path = Join-Path $env:TEMP ("ps4linux-diskpart-" + [guid]::NewGuid().ToString("N") + ".txt")
     try {

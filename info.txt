@@ -1,7 +1,8 @@
 # PS4 Linux Setup - manifest
 # One path per line, relative to the endpoint root.
-# Blank lines and lines starting with # are ignored.
-
+# Blank lines and lines starting with # are ignored, lines 4 and 5 are for changelog, version and what was changed respectively.
+# Version 1.2.0
+# Added Internal Installation.
 Setup.ps1
 modules/UI.psm1
 modules/Downloads.psm1
