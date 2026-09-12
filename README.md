@@ -24,6 +24,6 @@ Features are always being added, So why not stick around?
 
 # Sample screenshots
 
-![Header: PS4 Linux Setup, SubHeader: Prepare PS4 Linux. Setup configuration, Automatic External, formats a usb drive and copies the required files. Internal, uses ftp to transfer required files. Manual External, Requires WSL to trnasfer required files. (disabled)](screenshots\mainscreen.png)
-![Select the folder containing the kernel, initramfs, and distro archive.](screenshots\fileselect.png)
-![Select your USB drive](screenshots\driveselect.png)
+![Header: PS4 Linux Setup, SubHeader: Prepare PS4 Linux. Setup configuration, Automatic External, formats a usb drive and copies the required files. Internal, uses ftp to transfer required files. Manual External, Requires WSL to trnasfer required files. (disabled)](/screenshots/mainscreen.png)
+![Select the folder containing the kernel, initramfs, and distro archive.](/screenshots/fileselect.png)
+![Select your USB drive](/screenshots/driveselect.png)
